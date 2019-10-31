@@ -1,0 +1,122 @@
+[
+    {
+                "name": "naruto",
+                "level": 1,
+                "hp": 20.0,
+                "dps": 1.1,
+                "cost": 3, 
+                "size": 0,
+                "type": "wind",
+                "playerLevel": 1,
+                "weapons": ["Air Shuriken", "Light Punch", "Spirit Bomb", "Dark Strike", "Air Shuriken"],
+                "imgPaths": ["src\\Resources\\img\\naruto.png"]
+    },
+    {
+                "name": "mustang",
+                "level": 1,
+                "hp": 20.0,
+                "dps": 1.1,
+                "cost": 3, 
+                "size": 0,
+                "type": "fire",
+                "playerLevel": 1,
+                "weapons": ["Electric Cannon", "Steel Crush", "Fire Blast", "Dark Strike", "Fire Blast"],
+                "imgPaths": ["src\\Resources\\img\\mustang.png"]
+    },
+    {
+                "name": "gon",
+                "level": 1,
+                "hp": 20.0,
+                "dps": 1.1,
+                "cost": 3, 
+                "size": 0,
+                "type": "light",
+                "playerLevel": 1,
+                "weapons": ["Light Punch", "Light Punch", "Spirit Bomb", "Dark Strike", "Air Shuriken"],
+                "imgPaths": ["src\\Resources\\img\\gon.png"]
+    },
+    {
+                "name": "hisoka",
+                "level": 1,
+                "hp": 20.0,
+                "dps": 1.1,
+                "cost": 3, 
+                "size": 0,
+                "type": "dark",
+                "playerLevel": 1,
+                "weapons": ["Dark Strike", "Acid Slash", "Spirit Bomb", "Dark Strike", "Ice Blade"],
+                "imgPaths": ["src\\Resources\\img\\hisoka.png"]
+    },
+    {
+                "name": "killua",
+                "level": 1,
+                "hp": 20.0,
+                "dps": 1.1,
+                "cost": 3, 
+                "size": 0,
+                "type": "electric",
+                "playerLevel": 1,
+                "weapons": ["Electric Cannon", "Electric Cannon", "Spirit Bomb", "Dark Strike", "Steel Crush"],
+                "imgPaths": ["src\\Resources\\img\\killua.png"]
+    },
+    {
+                "name": "kisame",
+                "level": 1,
+                "hp": 20.0,
+                "dps": 1.1,
+                "cost": 3, 
+                "size": 0,
+                "type": "ice",
+                "playerLevel": 1,
+                "weapons": ["Ice Blade", "Ice Blade", "Water Bend", "Dark Strike", "Steel Crush"],
+                "imgPaths": ["src\\Resources\\img\\kisame.png"]
+    },
+    {
+                "name": "orochimaru",
+                "level": 1,
+                "hp": 20.0,
+                "dps": 1.1,
+                "cost": 3, 
+                "size": 0,
+                "type": "acid",
+                "playerLevel": 1,
+                "weapons": ["Acid Slash", "Acid Slash", "Air Shuriken", "Dark Strike", "Fire Blast"],
+                "imgPaths": ["src\\Resources\\img\\orochimaru.png"]
+    },
+    {
+                "name": "seiya",
+                "level": 1,
+                "hp": 20.0,
+                "dps": 1.1,
+                "cost": 3, 
+                "size": 0,
+                "type": "spirit",
+                "playerLevel": 1,
+                "weapons": ["Spirit Bomb", "Light Punch", "Spirit Bomb", "Steel Crush", "Steel Crush"],
+                "imgPaths": ["src\\Resources\\img\\seiya.png"]
+    },
+    {
+                "name": "edward",
+                "level": 1,
+                "hp": 20.0,
+                "dps": 1.1,
+                "cost": 3, 
+                "size": 0,
+                "type": "steel",
+                "playerLevel": 1,
+                "weapons": ["Steel Crush", "Steel Crush", "Light Punch", "Electric Cannon", "Ice Blade"],
+                "imgPaths": ["src\\Resources\\img\\edward.png"]
+    },
+    {
+                "name": "mercury",
+                "level": 1,
+                "hp": 30.0,
+                "dps": 1.8,
+                "cost": 3, 
+                "size": 0,
+                "type": "water",
+                "playerLevel": 1,
+                "weapons": ["Water Bend", "Water Bend", "Spirit Bomb", "Ice Blade", "Water Bend"],
+                "imgPaths": ["src\\Resources\\img\\mercury.png"]
+    }
+]
