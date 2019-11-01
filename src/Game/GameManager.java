@@ -28,6 +28,8 @@ public class GameManager extends AbstractObservable{
     public GameManager(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
+        loadWeaponsGamer1();
+        loadWeaponsGamer2();
     }
     
     
@@ -71,6 +73,23 @@ public class GameManager extends AbstractObservable{
     public void setCharactersPlayer2(ArrayList<ICharacter> charactersPlayer2) {
         this.charactersPlayer2 = charactersPlayer2;
     }
+
+    public ArrayList<ArrayList<IWeapon>> getWeaponsPlayer1() {
+        return weaponsPlayer1;
+    }
+
+    public void setWeaponsPlayer1(ArrayList<ArrayList<IWeapon>> weaponsPlayer1) {
+        this.weaponsPlayer1 = weaponsPlayer1;
+    }
+
+    public ArrayList<ArrayList<IWeapon>> getWeaponsPlayer2() {
+        return weaponsPlayer2;
+    }
+
+    public void setWeaponsPlayer2(ArrayList<ArrayList<IWeapon>> weaponsPlayer2) {
+        this.weaponsPlayer2 = weaponsPlayer2;
+    }
+    
     
     public void loadWeaponsGamer1(){
         ArrayList<IWeapon> weapons = new ArrayList();

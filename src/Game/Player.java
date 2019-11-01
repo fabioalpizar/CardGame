@@ -26,17 +26,10 @@ public class Player implements IObserver{
     private int winnerAttacks;
     private ArrayList<ICharacter> characters;
 
-    public Player(int ID, String username, int winnerGame, int loseGame, int giveUps, int loseAttacks, int winnerAttacks, ArrayList<ICharacter> characters) {
+    public Player(int ID, String username) {
         this.ID = ID;
         this.username = username;
-        this.winnerGame = winnerGame;
-        this.loseGame = loseGame;
-        this.giveUps = giveUps;
-        this.loseAttacks = loseAttacks;
-        this.winnerAttacks = winnerAttacks;
-        this.characters = characters;
     }
-
     
 
     public int getID() {
