@@ -26,7 +26,14 @@ public class Invoker {
         commandManager.registerCommand(command);
     }
     
-    public void comunicateConsole(String string) {
-        commandManager.getCommand().execute(string);
+    public void setRequest(String command) {
+        System.out.println("Los demás datos");
+        System.out.println(command);
+        commandManager.getCommand().setRequest(new Request());
+    }
+    
+    public void comunicateConsole() {
+        
+        commandManager.getCommand().execute();
     }
 }

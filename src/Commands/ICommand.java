@@ -12,5 +12,6 @@ import Game.Request;
  * @author kduran
  */
 public interface ICommand {
-    public void execute(String string);
+    public void setRequest(Request request);
+    public void execute();
 }

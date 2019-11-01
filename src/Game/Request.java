@@ -6,12 +6,13 @@
 package Game;
 
 import Server.AbstractMessage;
+import java.io.Serializable;
 
 /**
  *
  * @author kduran
  */
-public class Request extends AbstractMessage{
+public class Request extends AbstractMessage implements Serializable{
     private String command;
     private String character;
     private String weapon;
@@ -78,29 +79,6 @@ public class Request extends AbstractMessage{
         this.message = message;
     }
     
-    public String getString(){
-        String data = "";
-        if(command != null){
-            data += command + " ";
-        }
-        if (character != null){
-            data += character + " ";
-        }
-        if (weapon != null){
-            data += weapon + " ";
-        }
-        if (character2 != null){
-            data += character2 + " ";
-        }
-        if (weapon2 != null){
-            data += weapon2 + " ";
-        }
-        if (message != null){
-            data += "\"" + message + "\"";
-        }
-        return data;
-    }
-    
     @Override
     public String toString() {
         String data = "";
@@ -119,7 +97,7 @@ public class Request extends AbstractMessage{
         if (weapon2 != null) {
             data += " Weapon 2: " + weapon2;
         }
-        return "Request" + data;
+        return command + "-" + data;
     }
     
     

@@ -23,41 +23,125 @@ public class Log implements IController{
     public Log() {
         this.archive = new Archive(path);
     }
-
+    
     @Override
-    public void sendMessage(String request) {
-        Date date = new Date();
+    public void attack(Request request) {
+	Date date = new Date();
         
-        String data = "";
+        String data = "Command: attack";
         data += " Date: " + dateFormat.format(date);
         
-        data += " " + request;
-        
-        archive.writeLog(data);
-    }
-
-    @Override
-    public void refreshGUI(String request) {
-        Date date = new Date();
-        
-        String data = "";
-        data += " Date: " + dateFormat.format(date);
-        
-        data += " " + request;
+        data += " " + request.toString();
         
         archive.writeLog(data);    
     }
 
     @Override
-    public void exit(String request) {
+    public void chat(Request request) {
         Date date = new Date();
         
-        String data = "Commant: exit";
+        String data = "Command: chat";
         data += " Date: " + dateFormat.format(date);
         
-        data += " " + request;
+        data += " " + request.toString();
         
-        archive.writeLog(data);
+        archive.writeLog(data); 
+    }
+
+    @Override
+    public void giveUp(Request request) {
+        Date date = new Date();
+        
+        String data = "Command: give up";
+        data += " Date: " + dateFormat.format(date);
+        
+        data += " " + request.toString();
+        
+        archive.writeLog(data); 
+    }
+
+    @Override
+    public void mutualExit(Request request) {
+        Date date = new Date();
+        
+        String data = "Command: mutual exit";
+        data += " Date: " + dateFormat.format(date);
+        
+        data += " " + request.toString();
+        
+        archive.writeLog(data); 
+    }
+
+    @Override
+    public void nextRound(Request request) {
+        Date date = new Date();
+        
+        String data = "Command: next round";
+        data += " Date: " + dateFormat.format(date);
+        
+        data += " " + request.toString();
+        
+        archive.writeLog(data); 
+    }
+
+    @Override
+    public void rechargeWeapon(Request request) {
+        Date date = new Date();
+        
+        String data = "Command: recharge weapon";
+        data += " Date: " + dateFormat.format(date);
+        
+        data += " " + request.toString();
+        
+        archive.writeLog(data); 
+    }
+
+    @Override
+    public void selectGamer(Request request) {
+        Date date = new Date();
+        
+        String data = "Command: select gamer";
+        data += " Date: " + dateFormat.format(date);
+        
+        data += " " + request.toString();
+        
+        archive.writeLog(data); 
+    }
+
+    @Override
+    public void selectWeapon(Request request) {
+        Date date = new Date();
+        
+        String data = "Command: select weapon";
+        data += " Date: " + dateFormat.format(date);
+        
+        data += " " + request.toString();
+        
+        archive.writeLog(data); 
+    }
+
+    @Override
+    public void useWildCard(Request request) {
+        Date date = new Date();
+        
+        String data = "Command: use wildCard";
+        data += " Date: " + dateFormat.format(date);
+        
+        data += " " + request.toString();
+        
+        archive.writeLog(data); 
+    }
+
+    @Override
+    public void exit(Request request) {
+        Date date = new Date();
+        
+        String data = "Command: exit";
+        data += " Date: " + dateFormat.format(date);
+        
+        data += " " + request.toString();
+        
+        archive.writeLog(data); 
     }
     
 }

@@ -15,14 +15,23 @@ import Game.Request;
 public class RechargeWeapon implements ICommand{
 
     private CommandController controller;
+    private Log.Log log;
+    private Request request;
     
-    public RechargeWeapon(CommandController controller) {
+    public RechargeWeapon(CommandController controller, Log.Log log) {
         this.controller = controller;
+        this.log = log;
+    }
+    
+    @Override
+    public void setRequest(Request request) {
+        this.request = request;
     }
             
     @Override
-    public void execute(String string) {
-        controller.sendMessage(string);
+    public void execute() {
+        controller.rechargeWeapon(request);
+        log.rechargeWeapon(request);
     }
     
 }

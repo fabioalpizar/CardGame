@@ -15,14 +15,23 @@ import Game.Request;
 public class Chat implements ICommand{
 
     private CommandController controller;
+    private Request request;
+    private Log.Log log;
     
-    public Chat(CommandController controller) {
+    public Chat(CommandController controller, Log.Log log) {
         this.controller = controller;
+        this.log = log;
     }
-
+    
     @Override
-    public void execute(String request) {
-        controller.sendMessage(request);
+    public void setRequest(Request request) {
+        this.request = request;
+    }
+    
+    @Override
+    public void execute() {
+        controller.chat(request);
+        log.chat(request);
     }
     
 }

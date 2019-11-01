@@ -14,14 +14,23 @@ import Game.Request;
  */
 public class Exit implements ICommand{
     private CommandController controller;
+    private Log.Log log;
+    private Request request;
     
-    public Exit(CommandController controller) {
+    public Exit(CommandController controller, Log.Log log) {
         this.controller = controller;
+        this.log = log;
     }
-
+    
     @Override
-    public void execute(String string) {
-        controller.exit(string);
+    public void setRequest(Request request) {
+        this.request = request;
+    }
+    
+    @Override
+    public void execute() {
+        controller.exit(request);
+        log.exit(request);
     }
     
 }

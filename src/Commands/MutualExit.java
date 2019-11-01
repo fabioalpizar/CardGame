@@ -15,14 +15,23 @@ import Game.Request;
 public class MutualExit implements ICommand{
 
     private CommandController controller;
+    private Log.Log log;
+    private Request request;
 
-    public MutualExit(CommandController controller) {
+    public MutualExit(CommandController controller, Log.Log log) {
         this.controller = controller;
+        this.log = log;
+    }
+        
+    @Override
+    public void setRequest(Request request) {
+        this.request = request;
     }
     
     @Override
-    public void execute(String string) {
-        controller.sendMessage(string);
+    public void execute() {
+        controller.mutualExit(request);
+        log.mutualExit(request);
     }
     
 }

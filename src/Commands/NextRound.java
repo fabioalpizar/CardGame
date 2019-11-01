@@ -15,14 +15,23 @@ import Game.Request;
 public class NextRound implements ICommand{
 
     private CommandController controller;
+    private Log.Log log;
+    private Request request;
     
-    public NextRound(CommandController controller) {
+    public NextRound(CommandController controller, Log.Log log) {
         this.controller = controller;
+        this.log = log;
     }
     
     @Override
-    public void execute(String string) {
-        controller.sendMessage(string);
+    public void setRequest(Request request) {
+        this.request = request;
+    }
+    
+    @Override
+    public void execute() {
+        controller.nextRound(request);
+        log.nextRound(request);
     }
     
 }
