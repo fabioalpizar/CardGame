@@ -1,6 +1,7 @@
 package Game;
 
 import CharacterApi.ICharacter;
+import CharacterApi.IWeapon;
 import ObserverPattern.IObserver;
 
 /*
@@ -55,6 +56,14 @@ public class Player implements IObserver, Serializable{
         this.client = client;
     }
 
+    public List<ICharacter> getCharactersPlayer() {
+        return charactersPlayer;
+    }
+
+    public void setCharactersPlayer(List<ICharacter> charactersPlayer) {
+        this.charactersPlayer = charactersPlayer;
+    }
+
     
     
     @Override
@@ -64,7 +73,11 @@ public class Player implements IObserver, Serializable{
             switch(command){
                 case "selectCharacter":
                     ICharacter C = (ICharacter) source;
-                    String msg = C.getName() + "\nHP: " + C.getHp() + "\n" + C.getWeapons();
+                    String weapons = "";
+                    for(IWeapon i : C.getWeapons()){
+                        weapons = "Weapon: " + i.getName() + "\nType: " + i.getType();
+                    }
+                    String msg = C.getName() + "\nHP: " + C.getHp() + "\n" + weapons;
                     response.setMessage(msg);
                     break;
                 case"successAttack":

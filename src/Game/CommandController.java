@@ -179,6 +179,12 @@ public class CommandController implements IController{
                     request.setCommand("error");
                 }
             break;
+            case "sg":
+                if (words.size() == 2){
+                    request.setCharacter(words.get(1));
+                }else{
+                    request.setCommand("error");
+                }
         }
         return request;
     }
