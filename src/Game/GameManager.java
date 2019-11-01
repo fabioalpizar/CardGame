@@ -190,7 +190,7 @@ public class GameManager extends AbstractObservable{
             //FALTA VALIDAR CUAL JUGADOR GANA
             //FALTA SUMAR EL ESTADO DEL ATAQUE
            
-           this.response.setMessage("succesfully attack");
+           this.response.setMessage("succesfully attack"); //ESTE MENSAJE DEBE CAMBIAR
             return this.response;   
         }
         this.response.setMessage("lose attack");
@@ -254,9 +254,13 @@ public class GameManager extends AbstractObservable{
         this.response.setMessage("reloaded weapons");
         return this.response;
     }
-    public void useWildCard(String character1, String weapon1, String character2, String weapon2){
-        attack(character1, weapon1);
-        attack(character2, weapon2);
+    
+    
+    public Response useWildCard(String character1, String weapon1, String character2, String weapon2){
+        Response aux1 = attack(character1, weapon1);
+        Response aux2 = attack(character2, weapon2);
+        this.response.setMessage(aux1 + " - "+ aux2 );
+        return this.response;
     }
     
    
