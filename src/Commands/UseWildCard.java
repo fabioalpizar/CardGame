@@ -6,31 +6,26 @@
 package Commands;
 
 import Game.CommandController;
+import Game.GameManager;
 import Game.Request;
+import Log.Log;
 
 /**
  *
  * @author kduran
  */
 public class UseWildCard implements ICommand{
-    private CommandController controller;
-    private Log.Log log;
-    private Request request;
-    
-    public UseWildCard(CommandController controller, Log.Log log) {
-        this.controller = controller;
+    private GameManager gameManager;
+    private Log log;
+    public UseWildCard(GameManager gameManager, Log log) {
+        this.gameManager = gameManager;
         this.log = log;
     }
     
     @Override
-    public void setRequest(Request request) {
-        this.request = request;
-    }
-    
-    @Override
-    public void execute() {
-        controller.useWildCard(request);
-        log.useWildCard(request);
+    public void execute(Request request) {
+        gameManager.useWildCard(request.getCharacter(), request.getWeapon(), request.getCharacter2(), request.getWeapon2());
+        log.sendMessage(request.toString());
     }
     
 }

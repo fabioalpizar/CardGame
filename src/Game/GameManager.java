@@ -138,7 +138,7 @@ public class GameManager extends AbstractObservable{
     //metodo para buscar el personaje en la lista
     public ICharacter searchCharacter(String nameCharacter){
         ArrayList<ICharacter> characters = searchCharactersList(turn.getID());
-        if(characters!=null){
+        if(characters != null){
             for(ICharacter character: characters){
                 if(character.getName().equals(nameCharacter)){
                     return character;

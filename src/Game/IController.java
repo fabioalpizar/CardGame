@@ -10,23 +10,9 @@ package Game;
  * @author kduran
  */
 public interface IController {
-    public void attack(Request request);
+    public void sendMessage(String request);
     
-    public void chat(Request request);
-
-    public void giveUp(Request request);
+    public void refreshGUI(String request);
     
-    public void mutualExit(Request request);
-    
-    public void nextRound(Request request);
-    
-    public void rechargeWeapon(Request request);
-    
-    public void selectGamer(Request request);
-    
-    public void selectWeapon(Request request);
-    
-    public void useWildCard(Request request);
-    
-    public void exit(Request request);
+    public void exit(String request);
 }

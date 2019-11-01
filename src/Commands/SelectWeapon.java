@@ -15,23 +15,14 @@ import Game.Request;
 public class SelectWeapon implements ICommand{
 
     private CommandController controller;
-    private Log.Log log;
-    private Request request;
     
-    public SelectWeapon(CommandController controller, Log.Log log) {
+    public SelectWeapon(CommandController controller) {
         this.controller = controller;
-        this.log = log;
     }
     
     @Override
-    public void setRequest(Request request) {
-        this.request = request;
-    }
-    
-    @Override
-    public void execute() {
-        controller.selectWeapon(request);
-        log.selectWeapon(request);
+    public void execute(Request string) {
+        controller.refreshGUI(string.getCharacter());
     }
     
 }

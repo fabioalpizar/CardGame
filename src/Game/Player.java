@@ -75,7 +75,7 @@ public class Player implements IObserver, Serializable{
                     ICharacter C = (ICharacter) source;
                     String weapons = "";
                     for(IWeapon i : C.getWeapons()){
-                        weapons = "Weapon: " + i.getName() + "\nType: " + i.getType();
+                        weapons = weapons + "Weapon: " + i.getName() + "\nType: " + i.getType();
                     }
                     String msg = C.getName() + "\nHP: " + C.getHp() + "\n" + weapons;
                     response.setMessage(msg);

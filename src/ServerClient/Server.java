@@ -5,6 +5,8 @@
  */
 package ServerClient;
 
+import Commands.ICommand;
+import Commands.Invoker;
 import Game.CommandController;
 import Game.GameManager;
 import Game.Player;
@@ -20,13 +22,14 @@ import java.util.ArrayList;
  * @author Pumkin
  */
 public class Server extends AbstractServer{
-
     private GameManager gameManager;
     private final CommandController controller;
-
+    private Invoker invoker;
+    
     public Server() {
         this.gameManager = new GameManager();
-        this.controller = new CommandController();
+        this.controller = new CommandController(gameManager);
+        this.invoker = new Invoker();
     }
     
     @Override
@@ -42,39 +45,11 @@ public class Server extends AbstractServer{
     }
 
     public String execute(Request msg){
+        ICommand command = controller.registerCommandString(msg.getCommand());
+        invoker.setRequest(msg);
+        invoker.setCommand(command);
+        invoker.comunicateConsole();
         
-        //metodo donde va a entrar el request
-        //a la llamada de los metodos le hace falta los parametros
-        switch(msg.getCommand()){
-             case "chat":
-                gameManager.chat(msg.getMessage());
-                break;
-            case "att":
-                gameManager.attack(msg.getCharacter(), msg.getWeapon());
-                break;
-            case "gu":
-                gameManager.giveUp();
-                //giveUp();
-                break;
-            case "me":
-                gameManager.mutualExit();
-                //mutualExit();
-                break;
-            case "nr":
-                gameManager.skipTurn();
-                //skipTurn();
-                break;
-            case "rw":
-                gameManager.rechargeWeapons();
-                //rechargeWeapons();
-                break;
-            case "uwc":
-                gameManager.useWildCard(msg.getCharacter(), msg.getWeapon(), msg.getCharacter2(), msg.getWeapon2());
-                break;
-            case "sg":
-                gameManager.selectCharacter(msg.getCharacter());
-                break;
-        }
         return new Response().getMessage();
     }
 

@@ -21,19 +21,16 @@ public class Invoker {
     public Invoker() {
         this.commandManager = new CommandManager();
     }
+
+    public void setRequest(Request request) {
+        this.request = request;
+    }
     
     public void setCommand(ICommand command) {
         commandManager.registerCommand(command);
     }
     
-    public void setRequest(String command) {
-        System.out.println("Los demás datos");
-        System.out.println(command);
-        commandManager.getCommand().setRequest(new Request());
-    }
-    
     public void comunicateConsole() {
-        
-        commandManager.getCommand().execute();
+        commandManager.getCommand().execute(request);
     }
 }

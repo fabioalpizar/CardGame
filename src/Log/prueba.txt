@@ -37,3 +37,40 @@ Command: exit Date: 2019/10/31 08:36:38 Request
 Command: chat Date: 2019/10/31 08:36:51 Request Message: Holiii adf
 Command: give up Date: 2019/10/31 10:42:08 Request
 Command: select weapon Date: 2019/10/31 10:42:16 Request
+ Date: 2019/11/01 13:08:27 chat- Message: asd
+ Date: 2019/11/01 13:08:35 sg- Character: naruto
+ Date: 2019/11/01 13:10:29 att- Character: naruto Weapon: Air Shuriken
+ Date: 2019/11/01 13:11:47 sg- Character: kisame
+ Date: 2019/11/01 13:11:54 sg- Character: naruto
+ Date: 2019/11/01 13:12:17 att- Character: naruto Weapon: Air Shuriken
+ Date: 2019/11/01 13:12:22 sg- Character: kisame
+ Date: 2019/11/01 13:14:33 att- Character: naruto Weapon: Air Shuriken
+ Date: 2019/11/01 13:14:50 sg- Character: kisame
+ Date: 2019/11/01 13:14:57 sg- Character: kisame
+ Date: 2019/11/01 13:15:11 sg- Character: killua
+ Date: 2019/11/01 13:15:14 sg- Character: killua
+ Date: 2019/11/01 13:15:20 sg- Character: naruto
+ Date: 2019/11/01 13:15:28 sg- Character: naruto
+ Date: 2019/11/01 13:15:45 sg- Character: naruto
+ Date: 2019/11/01 13:16:50 sg- Character: killua
+ Date: 2019/11/01 13:17:25 sg- Character: killua
+ Date: 2019/11/01 13:19:27 sg- Character: killua
+ Date: 2019/11/01 13:19:54 att- Character: naruto Weapon: Air Shuriken
+ Date: 2019/11/01 13:20:03 sg- Character: kisame
+ Date: 2019/11/01 13:22:14 sg- Character: kisame
+ Date: 2019/11/01 13:22:17 sg- Character: kisame
+ Date: 2019/11/01 13:26:02 sg- Character: naruto
+ Date: 2019/11/01 13:26:05 sg- Character: naruto
+ Date: 2019/11/01 13:26:26 sg- Character: kisame
+ Date: 2019/11/01 13:26:33 sg- Character: killua
+ Date: 2019/11/01 13:28:00 sg- Character: killua
+ Date: 2019/11/01 13:28:04 sg- Character: kisame
+ Date: 2019/11/01 13:28:13 sg- Character: gon
+ Date: 2019/11/01 13:28:20 sg- Character: orochimaru
+ Date: 2019/11/01 13:28:31 sg- Character: kisame
+ Date: 2019/11/01 13:28:42 sg- Character: killua
+ Date: 2019/11/01 13:29:25 att- Character: naruto Weapon: Air Shuriken
+ Date: 2019/11/01 13:29:31 sg- Character: kisame
+ Date: 2019/11/01 13:31:44 uwc- Character: naruto Weapon: Air Shuriken Character 2: killua Weapon 2: Electric Cannon
+ Date: 2019/11/01 13:31:55 sg- Character: killua
+ Date: 2019/11/01 13:32:00 sg- Character: kisame

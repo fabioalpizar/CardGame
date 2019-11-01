@@ -7,6 +7,7 @@ package Commands;
 
 import Game.CommandController;
 import Game.Request;
+import Log.Log;
 
 /**
  *
@@ -14,23 +15,16 @@ import Game.Request;
  */
 public class Exit implements ICommand{
     private CommandController controller;
-    private Log.Log log;
-    private Request request;
-    
-    public Exit(CommandController controller, Log.Log log) {
+    private Log log;
+    public Exit(CommandController controller, Log log) {
         this.controller = controller;
         this.log = log;
     }
-    
+
     @Override
-    public void setRequest(Request request) {
-        this.request = request;
-    }
-    
-    @Override
-    public void execute() {
-        controller.exit(request);
-        log.exit(request);
+    public void execute(Request string) {
+        controller.exit("");
+        log.sendMessage(string.toString());
     }
     
 }
