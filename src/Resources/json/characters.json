@@ -6,7 +6,7 @@
                 "dps": 1.1,
                 "cost": 3, 
                 "size": 0,
-                "type": "wind",
+                "type": "Aire",
                 "playerLevel": 1,
                 "weapons": ["Air Shuriken", "Light Punch", "Spirit Bomb", "Dark Strike", "Air Shuriken"],
                 "imgPaths": ["src\\Resources\\img\\naruto.png"]
@@ -18,7 +18,7 @@
                 "dps": 1.1,
                 "cost": 3, 
                 "size": 0,
-                "type": "fire",
+                "type": "Fuego",
                 "playerLevel": 1,
                 "weapons": ["Electric Cannon", "Steel Crush", "Fire Blast", "Dark Strike", "Fire Blast"],
                 "imgPaths": ["src\\Resources\\img\\mustang.png"]
@@ -30,7 +30,7 @@
                 "dps": 1.1,
                 "cost": 3, 
                 "size": 0,
-                "type": "light",
+                "type": "Magia blanca",
                 "playerLevel": 1,
                 "weapons": ["Light Punch", "Light Punch", "Spirit Bomb", "Dark Strike", "Air Shuriken"],
                 "imgPaths": ["src\\Resources\\img\\gon.png"]
@@ -42,7 +42,7 @@
                 "dps": 1.1,
                 "cost": 3, 
                 "size": 0,
-                "type": "dark",
+                "type": "Magia negra",
                 "playerLevel": 1,
                 "weapons": ["Dark Strike", "Acid Slash", "Spirit Bomb", "Dark Strike", "Ice Blade"],
                 "imgPaths": ["src\\Resources\\img\\hisoka.png"]
@@ -54,7 +54,7 @@
                 "dps": 1.1,
                 "cost": 3, 
                 "size": 0,
-                "type": "electric",
+                "type": "Electricidad",
                 "playerLevel": 1,
                 "weapons": ["Electric Cannon", "Electric Cannon", "Spirit Bomb", "Dark Strike", "Steel Crush"],
                 "imgPaths": ["src\\Resources\\img\\killua.png"]
@@ -66,7 +66,7 @@
                 "dps": 1.1,
                 "cost": 3, 
                 "size": 0,
-                "type": "ice",
+                "type": "Hielo",
                 "playerLevel": 1,
                 "weapons": ["Ice Blade", "Ice Blade", "Water Bend", "Dark Strike", "Steel Crush"],
                 "imgPaths": ["src\\Resources\\img\\kisame.png"]
@@ -78,7 +78,7 @@
                 "dps": 1.1,
                 "cost": 3, 
                 "size": 0,
-                "type": "acid",
+                "type": "Acid",
                 "playerLevel": 1,
                 "weapons": ["Acid Slash", "Acid Slash", "Air Shuriken", "Dark Strike", "Fire Blast"],
                 "imgPaths": ["src\\Resources\\img\\orochimaru.png"]
@@ -90,7 +90,7 @@
                 "dps": 1.1,
                 "cost": 3, 
                 "size": 0,
-                "type": "spirit",
+                "type": "Espiritualidad",
                 "playerLevel": 1,
                 "weapons": ["Spirit Bomb", "Light Punch", "Spirit Bomb", "Steel Crush", "Steel Crush"],
                 "imgPaths": ["src\\Resources\\img\\seiya.png"]
@@ -102,7 +102,7 @@
                 "dps": 1.1,
                 "cost": 3, 
                 "size": 0,
-                "type": "steel",
+                "type": "Hierro",
                 "playerLevel": 1,
                 "weapons": ["Steel Crush", "Steel Crush", "Light Punch", "Electric Cannon", "Ice Blade"],
                 "imgPaths": ["src\\Resources\\img\\edward.png"]
@@ -114,7 +114,7 @@
                 "dps": 1.8,
                 "cost": 3, 
                 "size": 0,
-                "type": "water",
+                "type": "Agua",
                 "playerLevel": 1,
                 "weapons": ["Water Bend", "Water Bend", "Spirit Bomb", "Ice Blade", "Water Bend"],
                 "imgPaths": ["src\\Resources\\img\\mercury.png"]
