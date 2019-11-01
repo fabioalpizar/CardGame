@@ -43,6 +43,7 @@ public class GameManager extends AbstractObservable{
 
     public void setPlayer1(Player player1) {
         this.player1 = player1;
+        this.turn = player1;
         addObserver(player1);
     }
 
@@ -140,7 +141,7 @@ public class GameManager extends AbstractObservable{
         return true;  
     }
     
-    public boolean attack(String characterName, String weaponName){
+    public void attack(String characterName, String weaponName){
         IWeapon weapon = searchWeapon(characterName, weaponName);
         int totalDamage = 0;
         ArrayList<ICharacter> currentCharacters = new ArrayList<>();
@@ -162,12 +163,13 @@ public class GameManager extends AbstractObservable{
                     C.setHp(newHP);   
                 }
             }
-            return true;   
+           notifyAllObservers("successAttack", "Successful attack from: " + turn.getUsername() + " - Total damage: " + totalDamage);    
         }
-        return false;
+        notifyAllObservers("failedAttack", "Failed attack from: " + turn.getUsername() + " - Total damage: " + totalDamage);
     }
     
     public void giveUp(){
+        notifyAllObservers("giveUp", turn.getUsername() + " has given up. What a loser.");
     }
     
     public void mutualExit(){
@@ -193,17 +195,25 @@ public class GameManager extends AbstractObservable{
     }
     
     public void useWildCard(String character1, String weapon1, String character2, String weapon2){
+        notifyAllObservers("wildCard", "Wild Card attack incoming from: " + this.turn.getUsername());
+        Player aux = this.turn;
         attack(character1, weapon1);
+        this.turn = aux;
         attack(character2, weapon2);
     }
     
     public void selectCharacter(String characterName){
         //este metodo es solo mostrar por pantalla la seleccion
         ICharacter character = searchCharacter(characterName);
-        notifyAllObservers("selectCharacter", character);
+        if(character !=  null){
+            notifyAllObservers("selectCharacter", character);  
+        }else{
+            notifyAllObservers("selectNull", "You don't have that character my dude");
+        }
     }
     public void skipTurn(){
-        if(turn.getID()==player1.getID()){
+        notifyAllObservers("skipTurn", this.turn.getUsername() + " skiped his turn.");
+        if(turn.getID() == player1.getID()){
             this.turn = player2;
         }else{
             this.turn = player1;
@@ -212,7 +222,6 @@ public class GameManager extends AbstractObservable{
     }
     
     public void chat(String msg){
-        System.out.println("sending");
         notifyAllObservers(msg, this.player1.getUsername());
     }
     
