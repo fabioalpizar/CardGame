@@ -39,13 +39,50 @@ public class Server extends AbstractServer{
     }
 
     @Override
-    public boolean finish(String msg) {
+    public boolean finish(AbstractMessage  msg) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public String execute(Request msg){
+        
+        //metodo donde va a entrar el request
+        //a la llamada de los metodos le hace falta los parametros
+        switch(msg.getCommand()){
+             case "chat":
+                gameManager.chat(msg.getMessage());
+                break;
+            case "att":
+                gameManager.attack(msg.getCharacter(), msg.getWeapon());
+                //attack();
+                break;
+            case "gu":
+                
+                //giveUp();
+                break;
+            case "me":
+                //mutualExit();
+                break;
+            case "nr":
+                //skipTurn();
+                break;
+            case "rw":
+                //rechargeWeapons();
+                break;
+            case "sg":
+                //selectCharacter();
+                break;
+            case "sw":
+                //esto es select weapon pero no es funcional con la logica
+                break;
+            case "uwc":
+                //useWildCard();
+                break;
+        }
+       
+    
+        
         String response;
-        return response;
+        return new Response().getMessage();
     }
     
 }
