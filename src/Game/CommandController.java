@@ -126,7 +126,7 @@ public class CommandController implements IController{
         String word = "";
         for (int n = 0; n < data.length(); n++) { 
             char c = data.charAt (n);
-            if(c == ' ') {
+            if(c == '-') {
                 if (n == data.length()-1) {
                     word+=c;
                 }

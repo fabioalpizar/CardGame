@@ -17,6 +17,9 @@ public class GameManager extends AbstractObservable{
     
     private static Player turn;
     
+    private static boolean mutualPlayer1 = false;
+    private static boolean mutualPlayer2 = false;
+    
     private Player player1;
     private Player player2;
     
@@ -149,13 +152,14 @@ public class GameManager extends AbstractObservable{
             this.turn = this.player2;
             currentCharacters = charactersPlayer1;
         }else{
-           currentCharacters = charactersPlayer2; 
+            currentCharacters = charactersPlayer2; 
         }
         for (ICharacter C : currentCharacters) {
             totalDamage = totalDamage + getDamageType(weapon, C.getType());
         }
         if(totalDamage > 100){
             for (ICharacter C : currentCharacters) {
+                
                 double newHP = C.getHp() - getDamageType(weapon, C.getType());
                 if(newHP < 0){
                     currentCharacters.remove(C);

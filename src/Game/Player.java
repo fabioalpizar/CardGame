@@ -66,34 +66,36 @@ public class Player implements IObserver, Serializable{
                     ICharacter C = (ICharacter) source;
                     String msg = C.getName() + "\nHP: " + C.getHp() + "\n" + C.getWeapons();
                     response.setMessage(msg);
-                    this.client.oos.writeObject(response);
                     break;
                 case"successAttack":
                     response.setMessage((String)source);
-                    this.client.oos.writeObject(response);
                     break;
                 case"failedAttack":
                     response.setMessage((String)source);
-                    this.client.oos.writeObject(response);
                     break;
                 case"giveUp":
                     response.setMessage((String)source);
-                    this.client.oos.writeObject(response);
                     break;
                 case"wildCard":
                     response.setMessage((String)source);
-                    this.client.oos.writeObject(response);
                     break;
                 case"skipTurn":
                     response.setMessage((String)source);
-                    this.client.oos.writeObject(response);
+                    break;
+                case"player1":
+                    response.setMessage((String)source);
+                case"start":
+                    response.setMessage((String)source);
+                    break; 
+                case"end":
+                    response.setMessage((String)source);
                     break; 
                 default:
                     response.setMessage(command);
-                    this.client.oos.writeObject(response); 
                     break;
 
             }
+            this.client.oos.writeObject(response); 
         }catch(Exception e){
             System.out.println(e);
         }

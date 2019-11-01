@@ -32,8 +32,12 @@ public class Server extends AbstractServer{
     @Override
     public AbstractMessage evaluate(Object msg) {
         Response response = new Response();
-        Request request = (Request)createMessage((String) msg);
-        response.setMessage(execute(request));
+        if((String)msg != ""){
+          Request request = (Request)createMessage((String) msg);
+          response.setMessage(execute(request));  
+        }else{
+           response.setMessage((String)msg);  
+        }
         return response;
     }
 
@@ -67,6 +71,9 @@ public class Server extends AbstractServer{
             case "uwc":
                 gameManager.useWildCard(msg.getCharacter(), msg.getWeapon(), msg.getCharacter2(), msg.getWeapon2());
                 break;
+            case "sg":
+                gameManager.selectCharacter(msg.getCharacter());
+                break;
         }
         return new Response().getMessage();
     }
@@ -74,6 +81,7 @@ public class Server extends AbstractServer{
     @Override
     public boolean finish(String msg) {
         if(msg.equalsIgnoreCase("end")){
+            this.gameManager.notifyAllObservers("end", "Ending connection.");
             return true;
         }else{
             return false;
@@ -86,10 +94,12 @@ public class Server extends AbstractServer{
             System.out.println("Player1 added");
             gameManager.setPlayer1((Player)o);
             gameManager.getPlayer1().setClient(this.getClientList().get(this.getClientList().size()-1));
+            this.gameManager.notifyAllObservers("player1", "You are player 1.");
         }else{
             System.out.println("Player2 added");
             gameManager.setPlayer2((Player)o);
             gameManager.getPlayer2().setClient(this.getClientList().get(this.getClientList().size()-1));
+            this.gameManager.notifyAllObservers("start", "Game has started, player 1 starts.");
         }
     }
     
