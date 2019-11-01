@@ -28,10 +28,6 @@ public class CardGame {
         CharacterJsonLoader charLoader = new CharacterJsonLoader(weaponList);
         List<ICharacter> characterList = charLoader.load("src\\Resources\\characters.json");
         
-        for(ICharacter C : characterList){
-            System.out.println(C.getName());   
-        }
-        
     }
     
 }
