@@ -22,9 +22,17 @@ public class GameManager extends AbstractObservable{
     
     private ArrayList<ICharacter> charactersPlayer1 = new ArrayList<>(); 
     private ArrayList<ICharacter> charactersPlayer2 = new ArrayList<>(); 
-    private ArrayList<IWeapon> weaponsPlayer1 = new ArrayList<>(); 
-    private ArrayList<IWeapon> weaponsPlayer2 = new ArrayList<>();
+    private ArrayList<ArrayList<IWeapon>> weaponsPlayer1 = new ArrayList<>(); 
+    private ArrayList<ArrayList<IWeapon>> weaponsPlayer2 = new ArrayList<>();
 
+    public GameManager(Player player1, Player player2) {
+        this.player1 = player1;
+        this.player2 = player2;
+        loadWeaponsGamer1();
+        loadWeaponsGamer2();
+    }
+    
+    
     public static Player getTurn() {
         return turn;
     }
@@ -66,21 +74,47 @@ public class GameManager extends AbstractObservable{
         this.charactersPlayer2 = charactersPlayer2;
     }
 
-    public ArrayList<IWeapon> getWeaponsPlayer1() {
+    public ArrayList<ArrayList<IWeapon>> getWeaponsPlayer1() {
         return weaponsPlayer1;
     }
 
-    public void setWeaponsPlayer1(ArrayList<IWeapon> weaponsPlayer1) {
+    public void setWeaponsPlayer1(ArrayList<ArrayList<IWeapon>> weaponsPlayer1) {
         this.weaponsPlayer1 = weaponsPlayer1;
     }
 
-    public ArrayList<IWeapon> getWeaponsPlayer2() {
+    public ArrayList<ArrayList<IWeapon>> getWeaponsPlayer2() {
         return weaponsPlayer2;
     }
 
-    public void setWeaponsPlayer2(ArrayList<IWeapon> weaponsPlayer2) {
+    public void setWeaponsPlayer2(ArrayList<ArrayList<IWeapon>> weaponsPlayer2) {
         this.weaponsPlayer2 = weaponsPlayer2;
     }
+    
+    
+    public void loadWeaponsGamer1(){
+        ArrayList<IWeapon> weapons = new ArrayList();
+        for (int i = 0; i < this.charactersPlayer1.size(); i++) {
+            for (int j = 0; j < this.charactersPlayer1.get(i).getWeapons().size(); j++) {
+                weapons.add(this.charactersPlayer1.get(i).getWeapons().get(j));  
+            }
+            this.weaponsPlayer1.set(i,weapons);
+            weapons.clear();
+        }
+      
+    }
+    
+    public void loadWeaponsGamer2(){
+        ArrayList<IWeapon> weapons = new ArrayList();
+        for (int i = 0; i < this.charactersPlayer2.size(); i++) {
+            for (int j = 0; j < this.charactersPlayer2.get(i).getWeapons().size(); j++) {
+                weapons.add(this.charactersPlayer2.get(i).getWeapons().get(j));  
+            }
+            this.weaponsPlayer2.set(i,weapons);
+            weapons.clear();
+        }
+    }
+    
+    
     
     //metodo para buscar el personaje en la lista
     public ICharacter searchCharacter(String nameCharacter){
@@ -158,12 +192,12 @@ public class GameManager extends AbstractObservable{
         return false;
     }
     
-    public void giveUp(String msj){
+    public void giveUp(){
         if(turn.equals(player1.getID())){
-            System.out.println("msj "+msj+" ganó el jugador 2");
+            System.out.println("msj  ganó el jugador 2");
             //
         }else{
-            System.out.println("msj "+msj+" ganó el jugador 1");
+            System.out.println("msj ganó el jugador 1");
         }
     }
     
@@ -176,30 +210,45 @@ public class GameManager extends AbstractObservable{
         
     }
 
-    public void rechargeWeapons(){
-      if(turn.getID() == player1.getID()){
-          if(weaponsUsed(this.weaponsPlayer1, this.charactersPlayer1)){
-              this.weaponsPlayer1.clear();
-          }
-       
-      }else{
-          if(weaponsUsed(this.weaponsPlayer2, this.charactersPlayer2)){
-              this.weaponsPlayer2.clear();
-          }
-      }
+    //metodo para validar que los personajes hayan usado todas sus armas
+    public boolean validateWeapons(ArrayList<ICharacter> characters){
+        for(ICharacter character: characters){
+            if(character.getWeapons().size()>0){
+                return false;
+            }
+        }
+        return true;
     }
-    
+    //metodo para reinsertar las armas en cada personaje, esto para recargar
+    public void reinsertWeapons(ArrayList<ICharacter> characters, ArrayList<ArrayList<IWeapon>> weapons){
+        for (int i = 0; i < characters.size(); i++) {
+            characters.get(i).setWeapons(weapons.get(i));   
+        }
+    }
+    public void rechargeWeapons(){
+        if(turn.getID()==player1.getID()){
+            if(validateWeapons(this.charactersPlayer1)){
+                //metodo de reinserción a la lista de armas de cada personaje
+                reinsertWeapons(this.charactersPlayer1, this.weaponsPlayer1);
+            }else{
+                System.out.println("no puede recargar");
+            }
+        }else{
+            if(validateWeapons(this.charactersPlayer2)){
+                //metodo de reinserción a la lista de armas de cada personaje
+                reinsertWeapons(this.charactersPlayer2, this.weaponsPlayer2);
+            }else{
+                System.out.println("no puede recargar");
+            }
+        }
+    }
     public void useWildCard(String character1, String weapon1, String character2, String weapon2){
         attack(character1, weapon1);
         attack(character2, weapon2);
     }
     
-    public void selectCharacter(String characterName){
-        //este metodo es solo mostrar por pantalla la seleccion
-        ICharacter character = searchCharacter(characterName);
-        System.out.println(""+character);
-        
-    }
+   
+     
     public void skipTurn(){
         if(turn.getID()==player1.getID()){
             this.turn = player2;

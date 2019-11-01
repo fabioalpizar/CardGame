@@ -15,23 +15,14 @@ import Game.Request;
 public class Attack implements ICommand{
 
     private CommandController controller;
-    private Request request;
-    private Log.Log log;
     
-    public Attack(CommandController controller, Log.Log log) {
+    public Attack(CommandController controller) {
         this.controller = controller;
-        this.log = log;
-    }
-
-    @Override
-    public void setRequest(Request request) {
-        this.request = request;
     }
     
     @Override
-    public void execute() {
-        controller.attack(request);
-        log.attack(request);
+    public void execute(String request) {
+        controller.sendMessage(request);
     }
     
 }

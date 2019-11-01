@@ -15,21 +15,13 @@ import Log.Log;
 public class Error implements ICommand{
 
     private Request request;
-    private Log log;
 
-    public Error(Log log) {
-        this.log = log;
+    public Error() {
     }
     
     @Override
-    public void setRequest(Request request) {
-        this.request = request;
-    }
-    
-    @Override
-    public void execute() {
+    public void execute(String string) {
         System.out.println("El comando no existe");
-        log.exit(request);
     }
     
 }

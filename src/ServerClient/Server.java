@@ -53,29 +53,25 @@ public class Server extends AbstractServer{
                 break;
             case "att":
                 gameManager.attack(msg.getCharacter(), msg.getWeapon());
-                //attack();
                 break;
             case "gu":
-                
+                gameManager.giveUp();
                 //giveUp();
                 break;
             case "me":
+                gameManager.mutualExit();
                 //mutualExit();
                 break;
             case "nr":
+                gameManager.skipTurn();
                 //skipTurn();
                 break;
             case "rw":
+                gameManager.rechargeWeapons();
                 //rechargeWeapons();
                 break;
-            case "sg":
-                //selectCharacter();
-                break;
-            case "sw":
-                //esto es select weapon pero no es funcional con la logica
-                break;
             case "uwc":
-                //useWildCard();
+                gameManager.useWildCard(msg.getCharacter(), msg.getWeapon(), msg.getCharacter2(), msg.getWeapon2());
                 break;
         }
        

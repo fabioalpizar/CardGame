@@ -78,6 +78,29 @@ public class Request extends AbstractMessage{
         this.message = message;
     }
     
+    public String getString(){
+        String data = "";
+        if(command != null){
+            data += command + " ";
+        }
+        if (character != null){
+            data += character + " ";
+        }
+        if (weapon != null){
+            data += weapon + " ";
+        }
+        if (character2 != null){
+            data += character2 + " ";
+        }
+        if (weapon2 != null){
+            data += weapon2 + " ";
+        }
+        if (message != null){
+            data += "\"" + message + "\"";
+        }
+        return data;
+    }
+    
     @Override
     public String toString() {
         String data = "";

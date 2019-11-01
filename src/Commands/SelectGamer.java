@@ -15,23 +15,13 @@ import Game.Request;
 public class SelectGamer implements ICommand{
 
     private CommandController controller;
-    private Log.Log log;
-    private Request request;
 
-    public SelectGamer(CommandController controller, Log.Log log) {
-        this.controller = controller;
-        this.log = log;
-    }
-       
-    @Override
-    public void setRequest(Request request) {
-        this.request = request;
+    public SelectGamer(CommandController controller){
     }
     
     @Override
-    public void execute() {
-        controller.selectGamer(request);
-        log.selectGamer(request);
+    public void execute(String string) {
+        controller.sendMessage(string);
     }
     
 }

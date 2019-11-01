@@ -15,23 +15,14 @@ import Game.Request;
 public class GiveUp implements ICommand{
 
     private CommandController controller;
-    private Log.Log log;
-    private Request request;
     
-    public GiveUp(CommandController controller, Log.Log log) {
+    public GiveUp(CommandController controller) {
         this.controller = controller;
-        this.log = log;
     }
     
     @Override
-    public void setRequest(Request request) {
-        this.request = request;
-    }
-    
-    @Override
-    public void execute() {
-        controller.giveUp(request);
-        log.giveUp(request);
+    public void execute(String string) {
+        controller.sendMessage(string);
     }
     
 }

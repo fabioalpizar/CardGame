@@ -14,23 +14,14 @@ import Game.Request;
  */
 public class UseWildCard implements ICommand{
     private CommandController controller;
-    private Log.Log log;
-    private Request request;
     
-    public UseWildCard(CommandController controller, Log.Log log) {
+    public UseWildCard(CommandController controller) {
         this.controller = controller;
-        this.log = log;
     }
     
     @Override
-    public void setRequest(Request request) {
-        this.request = request;
-    }
-    
-    @Override
-    public void execute() {
-        controller.useWildCard(request);
-        log.useWildCard(request);
+    public void execute(String string) {
+        controller.sendMessage(string);
     }
     
 }

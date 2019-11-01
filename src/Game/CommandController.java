@@ -17,6 +17,7 @@ import Commands.SelectGamer;
 import Commands.SelectWeapon;
 import Commands.UseWildCard;
 import Log.Log;
+import ServerClient.Client;
 import java.util.ArrayList;
 
 /**
@@ -24,61 +25,19 @@ import java.util.ArrayList;
  * @author kduran
  */
 public class CommandController implements IController{
-    
+    public Client client;
     public boolean exit;
     private Log log;
 
-    public CommandController() {
+    public CommandController(Client client) {
         this.log = new Log();
+        this.client = client;
     }
     
-    @Override
-    public void attack(Request request) {
-        System.out.println("Attack");
-    }
+    
     
     @Override
-    public void chat(Request request) {
-        System.out.println("Chat");
-    }
-
-    @Override
-    public void giveUp(Request request) {
-        System.out.println("GiveUp");
-    }
-    
-    @Override
-    public void mutualExit(Request request) {
-        System.out.println("ExitM");
-    }
-    
-    @Override
-    public void nextRound(Request request) {
-        System.out.println("NextRound");
-    }
-    
-    @Override        
-    public void rechargeWeapon(Request request) {
-        System.out.println("RechargeWeapon");
-    }
-    
-    @Override
-    public void selectGamer(Request request) {
-        System.out.println("SelectGame");
-    }
-    
-    @Override
-    public void selectWeapon(Request request) {
-        System.out.println("SelectWeapon");
-    }
-    
-    @Override
-    public void useWildCard(Request request) {
-        System.out.println("UseWildCard");
-    }
-    
-    @Override
-    public void exit(Request request) {
+    public void exit(String request) {
         exit = true;
     }
     
@@ -86,37 +45,37 @@ public class CommandController implements IController{
         ICommand command = null;
         switch (commandString) {
             case "chat":
-                command = new Chat(this, log);
+                command = new Chat(this);
             break;
             case "att":
-                command = new Attack(this, log);
+                command = new Attack(this);
             break;
             case "gu":
-                command = new GiveUp(this, log);
+                command = new GiveUp(this);
             break;
             case "me":
-                command = new MutualExit(this, log);
+                command = new MutualExit(this);
             break;
             case "nr":
-                command = new NextRound(this, log);
+                command = new NextRound(this);
             break;
             case "rw":
-                command = new RechargeWeapon(this, log);
+                command = new RechargeWeapon(this);
             break;
             case "sg":
-                command = new SelectGamer(this, log);
+                command = new SelectGamer(this);
             break;
             case "sw":
-                command = new SelectWeapon(this, log);
+                command = new SelectWeapon(this);
             break;
             case "uwc":
-                command = new UseWildCard(this, log);
+                command = new UseWildCard(this);
             break;
             case "exit":
-                command = new Exit(this, log);
+                command = new Exit(this);
             break;
             default:
-                command = new Commands.Error(log);
+                command = new Commands.Error();
         }
         return command;
     }
@@ -181,5 +140,20 @@ public class CommandController implements IController{
             break;
         }
         return request;
+    }
+
+    @Override
+    public void sendMessage(String request) {
+        Request req = (Request) client.createMessage(request);
+        
+//        ICommand command = controller.registerCommandString(request.getCommand());
+//        invoker.setCommand(command);
+//        invoker.comunicateConsole("att P1 A1");
+        
+    }
+
+    @Override
+    public void refreshGUI(String request) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
