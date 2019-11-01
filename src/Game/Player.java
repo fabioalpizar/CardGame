@@ -68,6 +68,26 @@ public class Player implements IObserver, Serializable{
                     response.setMessage(msg);
                     this.client.oos.writeObject(response);
                     break;
+                case"successAttack":
+                    response.setMessage((String)source);
+                    this.client.oos.writeObject(response);
+                    break;
+                case"failedAttack":
+                    response.setMessage((String)source);
+                    this.client.oos.writeObject(response);
+                    break;
+                case"giveUp":
+                    response.setMessage((String)source);
+                    this.client.oos.writeObject(response);
+                    break;
+                case"wildCard":
+                    response.setMessage((String)source);
+                    this.client.oos.writeObject(response);
+                    break;
+                case"skipTurn":
+                    response.setMessage((String)source);
+                    this.client.oos.writeObject(response);
+                    break; 
                 default:
                     response.setMessage(command);
                     this.client.oos.writeObject(response); 
