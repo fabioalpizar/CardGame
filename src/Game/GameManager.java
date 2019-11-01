@@ -192,12 +192,12 @@ public class GameManager extends AbstractObservable{
         return false;
     }
     
-    public void giveUp(String msj){
+    public void giveUp(){
         if(turn.equals(player1.getID())){
-            System.out.println("msj "+msj+" ganó el jugador 2");
+            System.out.println("msj  ganó el jugador 2");
             //
         }else{
-            System.out.println("msj "+msj+" ganó el jugador 1");
+            System.out.println("msj ganó el jugador 1");
         }
     }
     
@@ -247,12 +247,8 @@ public class GameManager extends AbstractObservable{
         attack(character2, weapon2);
     }
     
-    public void selectCharacter(String characterName){
-        //este metodo es solo mostrar por pantalla la seleccion
-        ICharacter character = searchCharacter(characterName);
-        System.out.println(""+character);
-        
-    }
+   
+     
     public void skipTurn(){
         if(turn.getID()==player1.getID()){
             this.turn = player2;
