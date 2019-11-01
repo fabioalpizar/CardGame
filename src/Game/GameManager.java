@@ -20,6 +20,8 @@ public class GameManager extends AbstractObservable{
     private Player player1;
     private Player player2;
     
+    private Response response= new Response();
+    
     private ArrayList<ICharacter> charactersPlayer1 = new ArrayList<>(); 
     private ArrayList<ICharacter> charactersPlayer2 = new ArrayList<>(); 
     private ArrayList<ArrayList<IWeapon>> weaponsPlayer1 = new ArrayList<>(); 
@@ -89,6 +91,14 @@ public class GameManager extends AbstractObservable{
     public void setWeaponsPlayer2(ArrayList<ArrayList<IWeapon>> weaponsPlayer2) {
         this.weaponsPlayer2 = weaponsPlayer2;
     }
+
+    public Response getResponse() {
+        return response;
+    }
+
+    public void setResponse(Response response) {
+        this.response = response;
+    }
     
     
     public void loadWeaponsGamer1(){
@@ -113,9 +123,7 @@ public class GameManager extends AbstractObservable{
             weapons.clear();
         }
     }
-    
-    
-    
+
     //metodo para buscar el personaje en la lista
     public ICharacter searchCharacter(String nameCharacter){
         ArrayList<ICharacter> characters = searchCharactersList(turn.getID());
@@ -158,18 +166,9 @@ public class GameManager extends AbstractObservable{
          }
         return null;
     }
-        //valida que todas las armas hayan sido usadas para poder recargar
-    //si una no está en la lista de armas del jugador entonces no se recarga
-    public boolean weaponsUsed(ArrayList<IWeapon> weapons, ArrayList<ICharacter> characters){
-        for (ICharacter C : characters) {
-            if(C.getWeapons().size() > 0){
-                return false;
-            }
-        }
-        return true;  
-    }
     
-    public boolean attack(String characterName, String weaponName){
+    public Response attack(String characterName, String weaponName){
+        
         IWeapon weapon = searchWeapon(characterName, weaponName);
         int totalDamage = 0;
         ArrayList<ICharacter> currentCharacters = new ArrayList<>();
@@ -187,27 +186,38 @@ public class GameManager extends AbstractObservable{
                 double newHP = C.getHp() - getDamageType(weapon, C.getType());
                 C.setHp(newHP);
             }
-            return true;   
+            //FALTA ELIMINAR LOS PERSONAJES QUE MUEREN DE LA LISTA DE PERSONAJES 
+            //FALTA VALIDAR CUAL JUGADOR GANA
+            //FALTA SUMAR EL ESTADO DEL ATAQUE
+           
+           this.response.setMessage("succesfully attack");
+            return this.response;   
         }
-        return false;
+        this.response.setMessage("lose attack");
+        return this.response;
     }
     
-    public void giveUp(){
+    public Response giveUp(){
         if(turn.equals(player1.getID())){
-            System.out.println("msj  ganó el jugador 2");
-            //
+            this.response.setMessage("Player 1 gave up, player 2 wins");
+            return this.response;
         }else{
-            System.out.println("msj ganó el jugador 1");
+            this.response.setMessage("Player 2 gave up, player 1 wins");
+            return this.response;
         }
     }
     
-    public void mutualExit(){
+    public Response mutualExit(){
         if(turn.getID()==player1.getID()){
-            //aqui jugador 1 le manda un msj de confirmacion a jugador 2
+            
+            this.response.setMessage("Player 1:  proposed a tie");
+            return this.response;
         }else{
-            //aqui jugador 2 le manda un msj de confirmacion a jugador 1
+            
+            this.response.setMessage("Payer 2: proposed a tie");
+            return this.response;
         }
-        
+        //LE HACE FALTA QUE EL OTRO JUGADOR CONFIRME
     }
 
     //metodo para validar que los personajes hayan usado todas sus armas
@@ -225,22 +235,24 @@ public class GameManager extends AbstractObservable{
             characters.get(i).setWeapons(weapons.get(i));   
         }
     }
-    public void rechargeWeapons(){
+    public Response rechargeWeapons(){
         if(turn.getID()==player1.getID()){
             if(validateWeapons(this.charactersPlayer1)){
-                //metodo de reinserción a la lista de armas de cada personaje
-                reinsertWeapons(this.charactersPlayer1, this.weaponsPlayer1);
+                reinsertWeapons(this.charactersPlayer1, this.weaponsPlayer1); //metodo de reinserción a la lista de armas de cada personaje
             }else{
-                System.out.println("no puede recargar");
+                this.response.setMessage("can't reload weapons");
+                return this.response;
             }
         }else{
             if(validateWeapons(this.charactersPlayer2)){
-                //metodo de reinserción a la lista de armas de cada personaje
-                reinsertWeapons(this.charactersPlayer2, this.weaponsPlayer2);
+                reinsertWeapons(this.charactersPlayer2, this.weaponsPlayer2); //metodo de reinserción a la lista de armas de cada personaje
             }else{
-                System.out.println("no puede recargar");
+                this.response.setMessage("can't reload weapons");
+                return this.response;
             }
         }
+        this.response.setMessage("reloaded weapons");
+        return this.response;
     }
     public void useWildCard(String character1, String weapon1, String character2, String weapon2){
         attack(character1, weapon1);
@@ -249,21 +261,29 @@ public class GameManager extends AbstractObservable{
     
    
      
-    public void skipTurn(){
+    public Response skipTurn(){
         if(turn.getID()==player1.getID()){
             this.turn = player2;
+            this.response.setMessage("Player 1: Skipped the turn");
+            return this.response;
         }else{
             this.turn = player1;
+            this.response.setMessage("Player 2: Skipped the turn");
+            return this.response;
         }
         
     }
     
-    public void chat(String msj){
+    public Response chat(String msj){
         if(turn.getID()==player1.getID()){
             //jugador 1 le manda mensaje a jugador 2
+            this.response.setMessage("Message sent");
+            return this.response;
         }else{
             //jugador 2 le manda mensaje a jugador 1
-        }
+            this.response.setMessage("Message sent");
+            return this.response;
+        } //FALTA EL ENVIO DEL MENSAJE
     }
     
     public int getDamageType(IWeapon weapon, String type){
