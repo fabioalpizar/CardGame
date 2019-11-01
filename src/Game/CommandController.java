@@ -25,13 +25,12 @@ import java.util.ArrayList;
  * @author kduran
  */
 public class CommandController implements IController{
-    public Client client;
     public boolean exit;
     private Log log;
-
-    public CommandController(Client client) {
+    private GameManager gameManager;
+    public CommandController(GameManager gameManager) {
         this.log = new Log();
-        this.client = client;
+        this.gameManager = gameManager;
     }
     
     
@@ -45,34 +44,34 @@ public class CommandController implements IController{
         ICommand command = null;
         switch (commandString) {
             case "chat":
-                command = new Chat(this);
+                command = new Chat(gameManager, log);
             break;
             case "att":
-                command = new Attack(this);
+                command = new Attack(gameManager, log);
             break;
             case "gu":
-                command = new GiveUp(this);
+                command = new GiveUp(gameManager, log);
             break;
             case "me":
-                command = new MutualExit(this);
+                command = new MutualExit(gameManager, log);
             break;
             case "nr":
-                command = new NextRound(this);
+                command = new NextRound(gameManager, log);
             break;
             case "rw":
-                command = new RechargeWeapon(this);
+                command = new RechargeWeapon(gameManager, log);
             break;
             case "sg":
-                command = new SelectGamer(this);
+                command = new SelectGamer(gameManager, log);
             break;
             case "sw":
                 command = new SelectWeapon(this);
             break;
             case "uwc":
-                command = new UseWildCard(this);
+                command = new UseWildCard(gameManager, log);
             break;
             case "exit":
-                command = new Exit(this);
+                command = new Exit(this, log);
             break;
             default:
                 command = new Commands.Error();
@@ -144,7 +143,6 @@ public class CommandController implements IController{
 
     @Override
     public void sendMessage(String request) {
-        Request req = (Request) client.createMessage(request);
         
 //        ICommand command = controller.registerCommandString(request.getCommand());
 //        invoker.setCommand(command);

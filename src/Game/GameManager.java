@@ -17,20 +17,19 @@ public class GameManager extends AbstractObservable{
     
     private static Player turn;
     
+    private static boolean mutualPlayer1 = false;
+    private static boolean mutualPlayer2 = false;
+    
     private Player player1;
     private Player player2;
     
     private ArrayList<ICharacter> charactersPlayer1 = new ArrayList<>(); 
     private ArrayList<ICharacter> charactersPlayer2 = new ArrayList<>(); 
-    private ArrayList<ArrayList<IWeapon>> weaponsPlayer1 = new ArrayList<>(); 
-    private ArrayList<ArrayList<IWeapon>> weaponsPlayer2 = new ArrayList<>();
+    private ArrayList<IWeapon> weaponsPlayer1 = new ArrayList<>(); 
+    private ArrayList<IWeapon> weaponsPlayer2 = new ArrayList<>();
+    
+    public GameManager() {}
 
-    public GameManager(Player player1, Player player2) {
-        this.player1 = player1;
-        this.player2 = player2;
-        loadWeaponsGamer1();
-        loadWeaponsGamer2();
-    }
     
     
     public static Player getTurn() {
@@ -47,6 +46,7 @@ public class GameManager extends AbstractObservable{
 
     public void setPlayer1(Player player1) {
         this.player1 = player1;
+        this.turn = player1;
         addObserver(player1);
     }
 
@@ -56,6 +56,7 @@ public class GameManager extends AbstractObservable{
 
     public void setPlayer2(Player player2) {
         this.player2 = player2;
+        addObserver(player2);
     }
 
     public ArrayList<ICharacter> getCharactersPlayer1() {
@@ -74,47 +75,21 @@ public class GameManager extends AbstractObservable{
         this.charactersPlayer2 = charactersPlayer2;
     }
 
-    public ArrayList<ArrayList<IWeapon>> getWeaponsPlayer1() {
+    public ArrayList<IWeapon> getWeaponsPlayer1() {
         return weaponsPlayer1;
     }
 
-    public void setWeaponsPlayer1(ArrayList<ArrayList<IWeapon>> weaponsPlayer1) {
+    public void setWeaponsPlayer1(ArrayList<IWeapon> weaponsPlayer1) {
         this.weaponsPlayer1 = weaponsPlayer1;
     }
 
-    public ArrayList<ArrayList<IWeapon>> getWeaponsPlayer2() {
+    public ArrayList<IWeapon> getWeaponsPlayer2() {
         return weaponsPlayer2;
     }
 
-    public void setWeaponsPlayer2(ArrayList<ArrayList<IWeapon>> weaponsPlayer2) {
+    public void setWeaponsPlayer2(ArrayList<IWeapon> weaponsPlayer2) {
         this.weaponsPlayer2 = weaponsPlayer2;
     }
-    
-    
-    public void loadWeaponsGamer1(){
-        ArrayList<IWeapon> weapons = new ArrayList();
-        for (int i = 0; i < this.charactersPlayer1.size(); i++) {
-            for (int j = 0; j < this.charactersPlayer1.get(i).getWeapons().size(); j++) {
-                weapons.add(this.charactersPlayer1.get(i).getWeapons().get(j));  
-            }
-            this.weaponsPlayer1.set(i,weapons);
-            weapons.clear();
-        }
-      
-    }
-    
-    public void loadWeaponsGamer2(){
-        ArrayList<IWeapon> weapons = new ArrayList();
-        for (int i = 0; i < this.charactersPlayer2.size(); i++) {
-            for (int j = 0; j < this.charactersPlayer2.get(i).getWeapons().size(); j++) {
-                weapons.add(this.charactersPlayer2.get(i).getWeapons().get(j));  
-            }
-            this.weaponsPlayer2.set(i,weapons);
-            weapons.clear();
-        }
-    }
-    
-    
     
     //metodo para buscar el personaje en la lista
     public ICharacter searchCharacter(String nameCharacter){
@@ -169,7 +144,7 @@ public class GameManager extends AbstractObservable{
         return true;  
     }
     
-    public boolean attack(String characterName, String weaponName){
+    public void attack(String characterName, String weaponName){
         IWeapon weapon = searchWeapon(characterName, weaponName);
         int totalDamage = 0;
         ArrayList<ICharacter> currentCharacters = new ArrayList<>();
@@ -177,32 +152,32 @@ public class GameManager extends AbstractObservable{
             this.turn = this.player2;
             currentCharacters = charactersPlayer1;
         }else{
-           currentCharacters = charactersPlayer2; 
+            currentCharacters = charactersPlayer2; 
         }
         for (ICharacter C : currentCharacters) {
             totalDamage = totalDamage + getDamageType(weapon, C.getType());
         }
         if(totalDamage > 100){
             for (ICharacter C : currentCharacters) {
+                
                 double newHP = C.getHp() - getDamageType(weapon, C.getType());
-                C.setHp(newHP);
+                if(newHP < 0){
+                    currentCharacters.remove(C);
+                }else{
+                    C.setHp(newHP);   
+                }
             }
-            return true;   
+           notifyAllObservers("successAttack", "Successful attack from: " + turn.getUsername() + " - Total damage: " + totalDamage);    
         }
-        return false;
+        notifyAllObservers("failedAttack", "Failed attack from: " + turn.getUsername() + " - Total damage: " + totalDamage);
     }
     
     public void giveUp(){
-        if(turn.equals(player1.getID())){
-            System.out.println("msj  ganó el jugador 2");
-            //
-        }else{
-            System.out.println("msj ganó el jugador 1");
-        }
+        notifyAllObservers("giveUp", turn.getUsername() + " has given up. What a loser.");
     }
     
     public void mutualExit(){
-        if(turn.getID()==player1.getID()){
+        if(turn.getID() == player1.getID()){
             //aqui jugador 1 le manda un msj de confirmacion a jugador 2
         }else{
             //aqui jugador 2 le manda un msj de confirmacion a jugador 1
@@ -210,47 +185,39 @@ public class GameManager extends AbstractObservable{
         
     }
 
-    //metodo para validar que los personajes hayan usado todas sus armas
-    public boolean validateWeapons(ArrayList<ICharacter> characters){
-        for(ICharacter character: characters){
-            if(character.getWeapons().size()>0){
-                return false;
-            }
-        }
-        return true;
-    }
-    //metodo para reinsertar las armas en cada personaje, esto para recargar
-    public void reinsertWeapons(ArrayList<ICharacter> characters, ArrayList<ArrayList<IWeapon>> weapons){
-        for (int i = 0; i < characters.size(); i++) {
-            characters.get(i).setWeapons(weapons.get(i));   
-        }
-    }
     public void rechargeWeapons(){
-        if(turn.getID()==player1.getID()){
-            if(validateWeapons(this.charactersPlayer1)){
-                //metodo de reinserción a la lista de armas de cada personaje
-                reinsertWeapons(this.charactersPlayer1, this.weaponsPlayer1);
-            }else{
-                System.out.println("no puede recargar");
-            }
-        }else{
-            if(validateWeapons(this.charactersPlayer2)){
-                //metodo de reinserción a la lista de armas de cada personaje
-                reinsertWeapons(this.charactersPlayer2, this.weaponsPlayer2);
-            }else{
-                System.out.println("no puede recargar");
-            }
-        }
+      if(turn.getID() == player1.getID()){
+          if(weaponsUsed(this.weaponsPlayer1, this.charactersPlayer1)){
+              this.weaponsPlayer1.clear();
+          }
+       
+      }else{
+          if(weaponsUsed(this.weaponsPlayer2, this.charactersPlayer2)){
+              this.weaponsPlayer2.clear();
+          }
+      }
     }
+    
     public void useWildCard(String character1, String weapon1, String character2, String weapon2){
+        notifyAllObservers("wildCard", "Wild Card attack incoming from: " + this.turn.getUsername());
+        Player aux = this.turn;
         attack(character1, weapon1);
+        this.turn = aux;
         attack(character2, weapon2);
     }
     
-   
-     
+    public void selectCharacter(String characterName){
+        //este metodo es solo mostrar por pantalla la seleccion
+        ICharacter character = searchCharacter(characterName);
+        if(character !=  null){
+            notifyAllObservers("selectCharacter", character);  
+        }else{
+            notifyAllObservers("selectNull", "You don't have that character my dude");
+        }
+    }
     public void skipTurn(){
-        if(turn.getID()==player1.getID()){
+        notifyAllObservers("skipTurn", this.turn.getUsername() + " skiped his turn.");
+        if(turn.getID() == player1.getID()){
             this.turn = player2;
         }else{
             this.turn = player1;
@@ -258,12 +225,8 @@ public class GameManager extends AbstractObservable{
         
     }
     
-    public void chat(String msj){
-        if(turn.getID()==player1.getID()){
-            //jugador 1 le manda mensaje a jugador 2
-        }else{
-            //jugador 2 le manda mensaje a jugador 1
-        }
+    public void chat(String msg){
+        notifyAllObservers(msg, this.player1.getUsername());
     }
     
     public int getDamageType(IWeapon weapon, String type){

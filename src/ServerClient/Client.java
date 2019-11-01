@@ -5,10 +5,10 @@
  */
 package ServerClient;
 
-import Commands.ICommand;
 import Game.CommandController;
 import Game.Player;
 import Game.Request;
+import Game.Response;
 import Server.AbstractClient;
 import Server.AbstractMessage;
 import java.io.IOException;
@@ -20,20 +20,11 @@ import java.util.ArrayList;
  */
 public class Client extends AbstractClient{
 
-    private Player player;
-    private CommandController controller;
+    private Player player;    
     
     public Client(Player player) throws IOException, ClassNotFoundException {
         this.player = player;
         startClient(this.player);
-    }
-
-    public CommandController getController() {
-        return controller;
-    }
-
-    public void setController(CommandController controller) {
-        this.controller = controller;
     }
 
     public Player getPlayer() {
@@ -44,9 +35,12 @@ public class Client extends AbstractClient{
         this.player = player;
     }
     
+    
+    
     @Override
-    public AbstractMessage evaluate(AbstractMessage msg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void evaluate(AbstractMessage msg) {
+        Response respnse = (Response)msg;
+        System.out.println(respnse.getMessage());
     }
 
     @Override
@@ -59,11 +53,5 @@ public class Client extends AbstractClient{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public AbstractMessage createMessage(String string) {
-        ArrayList words = controller.defineString(string);
-        Request request = controller.defineData(words);
-        return request;
-    }
     
 }

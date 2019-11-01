@@ -20,7 +20,7 @@ public class Error implements ICommand{
     }
     
     @Override
-    public void execute(String string) {
+    public void execute(Request string) {
         System.out.println("El comando no existe");
     }
     

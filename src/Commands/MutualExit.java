@@ -6,7 +6,9 @@
 package Commands;
 
 import Game.CommandController;
+import Game.GameManager;
 import Game.Request;
+import Log.Log;
 
 /**
  *
@@ -14,15 +16,17 @@ import Game.Request;
  */
 public class MutualExit implements ICommand{
 
-    private CommandController controller;
-
-    public MutualExit(CommandController controller) {
+    private GameManager controller;
+    private Log log;
+    public MutualExit(GameManager controller, Log log) {
         this.controller = controller;
+        this.log = log;
     }
     
     @Override
-    public void execute(String string) {
-        controller.sendMessage(string);
+    public void execute(Request string) {
+        controller.mutualExit();
+        log.sendMessage(string.toString());
     }
     
 }

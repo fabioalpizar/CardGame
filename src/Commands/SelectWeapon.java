@@ -21,8 +21,8 @@ public class SelectWeapon implements ICommand{
     }
     
     @Override
-    public void execute(String string) {
-        controller.sendMessage(string);
+    public void execute(Request string) {
+        controller.refreshGUI(string.getCharacter());
     }
     
 }

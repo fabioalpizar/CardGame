@@ -1,0 +1,102 @@
+[
+    {
+        "name": "Air Shuriken",
+        "level": 1,
+        "damage": 1.0,
+        "reach": 1,
+        "aoe": 1,
+        "type": "air",
+        "multipliers": [30, 50, 35, 35, 35, 35, 35, 70, 30, 30],
+        "imgPaths": []
+    },
+    {
+        "name": "Fire Blast",
+        "level": 1,
+        "damage": 1.0,
+        "reach": 1,
+        "aoe": 1,
+        "type": "fire",
+        "multipliers": [30, 30, 20, 30, 30, 40, 60, 50, 40, 70],
+        "imgPaths": []
+    },
+    {
+        "name": "Water Bend",
+        "level": 1,
+        "damage": 1.0,
+        "reach": 1,
+        "aoe": 1,
+        "type": "water",
+        "multipliers": [35, 70, 30, 35, 35, 30, 30, 50, 35, 40],
+        "imgPaths": []
+    },
+    {
+        "name": "Light Punch",
+        "level": 1,
+        "damage": 1.0,
+        "reach": 1,
+        "aoe": 1,
+        "type": "light",
+        "multipliers": [45, 45, 45, 30, 30, 45, 45, 45, 45, 45],
+        "imgPaths": []
+    },
+    {
+        "name": "Dark Strike",
+        "level": 1,
+        "damage": 1.0,
+        "reach": 1,
+        "aoe": 1,
+        "type": "dark",
+        "multipliers": [45, 45, 45, 30, 30, 45, 45, 45, 45, 45],
+        "imgPaths": []
+    },
+    {
+        "name": "Electric Cannon",
+        "level": 1,
+        "damage": 1.0,
+        "reach": 1,
+        "aoe": 1,
+        "type": "electric",
+        "multipliers": [70, 35, 50, 35, 35, 30, 45, 45, 45, 45],
+        "imgPaths": []
+    },
+    {
+        "name": "Ice Blade",
+        "level": 1,
+        "damage": 1.0,
+        "reach": 1,
+        "aoe": 1,
+        "type": "ice",
+        "multipliers": [50, 30, 50, 35, 35, 45, 30, 45, 50, 30],
+        "imgPaths": []
+    },
+    {
+        "name": "Acid Slash",
+        "level": 1,
+        "damage": 1.0,
+        "reach": 1,
+        "aoe": 1,
+        "type": "acid",
+        "multipliers": [30, 30, 30, 45, 45, 30, 30, 30, 75, 30],
+        "imgPaths": []
+    },
+    {
+        "name": "Spirit Bomb",
+        "level": 1,
+        "damage": 1.0,
+        "reach": 1,
+        "aoe": 1,
+        "type": "spirit",
+        "multipliers": [55, 55, 55, 70, 70, 55, 55, 30, 30, 55],
+        "imgPaths": []
+    },
+    {
+        "name": "Steel Crush",
+        "level": 1,
+        "damage": 1.0,
+        "reach": 1,
+        "aoe": 1,
+        "type": "steel",
+        "multipliers": [50, 30, 45, 45, 45, 45, 70, 45, 45, 30],
+        "imgPaths": []
+    }
+]

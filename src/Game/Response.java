@@ -6,12 +6,13 @@
 package Game;
 
 import Server.AbstractMessage;
+import java.io.Serializable;
 
 /**
  *
  * @author Pumkin
  */
-public class Response extends AbstractMessage{
+public class Response extends AbstractMessage implements Serializable{
     
     private String message;
 

@@ -2,7 +2,6 @@ package Game;
 
 import CharacterApi.ICharacter;
 import ObserverPattern.IObserver;
-import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -10,27 +9,27 @@ import java.util.ArrayList;
  * and open the template in the editor.
  */
 
-
+import Server.*;
+import Server.AbstractServer.ClientHandler;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author raque
  */
-public class Player implements IObserver{
+public class Player implements IObserver, Serializable{
     private int ID;
     private String username;
-    private int winnerGame;
-    private int loseGame;
-    private int giveUps;
-    private int loseAttacks;
-    private int winnerAttacks;
-    private ArrayList<ICharacter> characters;
+    private List<ICharacter> charactersPlayer = new ArrayList<>();
+    private ClientHandler client;
 
-    public Player(int ID, String username) {
+    public Player(int ID, String username, List<ICharacter> charactersPlayer) {
         this.ID = ID;
         this.username = username;
+        this.charactersPlayer = charactersPlayer;
     }
-    
 
     public int getID() {
         return ID;
@@ -48,58 +47,59 @@ public class Player implements IObserver{
         this.username = username;
     }
 
-    public int getWinnerGame() {
-        return winnerGame;
+    public ClientHandler getClient() {
+        return client;
     }
 
-    public void setWinnerGame(int winnerGame) {
-        this.winnerGame = winnerGame;
+    public void setClient(ClientHandler client) {
+        this.client = client;
     }
 
-    public int getLoseGame() {
-        return loseGame;
-    }
-
-    public void setLoseGame(int loseGame) {
-        this.loseGame = loseGame;
-    }
-
-    public int getGiveUps() {
-        return giveUps;
-    }
-
-    public void setGiveUps(int giveUps) {
-        this.giveUps = giveUps;
-    }
-
-    public int getLoseAttacks() {
-        return loseAttacks;
-    }
-
-    public void setLoseAttacks(int loseAttacks) {
-        this.loseAttacks = loseAttacks;
-    }
-
-    public int getWinnerAttacks() {
-        return winnerAttacks;
-    }
-
-    public void setWinnerAttacks(int winnerAttacks) {
-        this.winnerAttacks = winnerAttacks;
-    }
-
-    public ArrayList<ICharacter> getCharacters() {
-        return characters;
-    }
-
-    public void setCharacters(ArrayList<ICharacter> characters) {
-        this.characters = characters;
-    }
     
-
+    
     @Override
     public void notifyObserver(String command, Object source) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Response response = new Response();
+        try{
+            switch(command){
+                case "selectCharacter":
+                    ICharacter C = (ICharacter) source;
+                    String msg = C.getName() + "\nHP: " + C.getHp() + "\n" + C.getWeapons();
+                    response.setMessage(msg);
+                    break;
+                case"successAttack":
+                    response.setMessage((String)source);
+                    break;
+                case"failedAttack":
+                    response.setMessage((String)source);
+                    break;
+                case"giveUp":
+                    response.setMessage((String)source);
+                    break;
+                case"wildCard":
+                    response.setMessage((String)source);
+                    break;
+                case"skipTurn":
+                    response.setMessage((String)source);
+                    break;
+                case"player1":
+                    response.setMessage((String)source);
+                case"start":
+                    response.setMessage((String)source);
+                    break; 
+                case"end":
+                    response.setMessage((String)source);
+                    break; 
+                default:
+                    response.setMessage(command);
+                    break;
+
+            }
+            this.client.oos.writeObject(response); 
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        
     }
     
     
